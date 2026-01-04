@@ -4,6 +4,7 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Calculator, BarChart3, Building2, FileText, Globe, PenTool, Shield, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ServicesPage() {
     return (
@@ -45,7 +46,7 @@ export default function ServicesPage() {
                     features={['Individual (1040) Returns', 'Self-Employed & Freelancers', 'ITIN Applications & Renewals', 'Amended Returns (1040-X)', 'State Tax Filings (All 50 States)']}
                     cta="Schedule Tax Appt"
                     ctaLink="/contact"
-                    imageSrc="/tax.png" // Placeholder, will fallback
+                    imageSrc="/tax.png"
                     align="left"
                 />
 
@@ -59,7 +60,7 @@ export default function ServicesPage() {
                     features={['Monthly Bookkeeping', 'Expense Tracking', 'Bank Reconciliations', 'Financial Statements (P&L)', 'Payroll Setup Assistance']}
                     cta="Get a Quote"
                     ctaLink="/contact"
-                    imageSrc="/bookkeeping.png" // Placeholder
+                    imageSrc="/bookkeeping.png"
                     align="right"
                 />
 
@@ -73,7 +74,7 @@ export default function ServicesPage() {
                     features={['LLC Registration', 'C-Corp & S-Corp Setup', 'EIN (Tax ID) Obtainment', 'Operating Agreements', 'Business License Guidance']}
                     cta="Start Your Business"
                     ctaLink="/contact"
-                    imageSrc="/incorporation.png" // Placeholder
+                    imageSrc="/incorporation.png"
                     align="left"
                 />
 
@@ -135,7 +136,8 @@ function ServiceSection({ id, title, subtitle, description, icon, features, cta,
 
                 <Link
                     href={ctaLink}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-200 transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-xl font-bold hover:bg-slate-200 transition-colors"
+                    style={{ color: '#0f172a' }}
                 >
                     {cta}
                     <ArrowRight className="w-4 h-4" />
@@ -146,16 +148,15 @@ function ServiceSection({ id, title, subtitle, description, icon, features, cta,
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className={`relative h-[400px] w-full rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 ${align === 'right' ? 'lg:order-1' : ''}`}
+                className={`relative h-[400px] w-full rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 group ${align === 'right' ? 'lg:order-1' : ''}`}
             >
-                {/* Simulated Image Placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
-                    <div className="text-center opacity-30">
-                        {icon}
-                        <span className="block mt-2 font-medium text-slate-500">Service Visualization</span>
-                    </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-transparent pointer-events-none"></div>
+                <Image
+                    src={imageSrc}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/20 to-transparent pointer-events-none"></div>
             </motion.div>
         </div>
     );

@@ -140,7 +140,8 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="px-8 py-4 bg-white text-slate-950 rounded-xl font-bold hover:bg-slate-200 transition-colors"
+              className="px-8 py-4 bg-white rounded-xl font-bold hover:bg-slate-200 transition-colors"
+              style={{ color: '#020617' }}
             >
               Schedule Free Consultation
             </Link>

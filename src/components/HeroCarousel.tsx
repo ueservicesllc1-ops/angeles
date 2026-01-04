@@ -154,7 +154,8 @@ export default function HeroCarousel() {
                                 </Link>
                                 <Link
                                     href={slides[current].secondaryLink}
-                                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-950 border-2 border-white rounded-xl font-bold hover:bg-slate-200 hover:border-slate-200 transition-all hover:-translate-y-1 shadow-[0_0_20px_rgba(255,255,255,0.3)] z-20"
+                                    className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-white rounded-xl font-bold hover:bg-slate-200 hover:border-slate-200 transition-all hover:-translate-y-1 shadow-[0_0_20px_rgba(255,255,255,0.3)] z-20"
+                                    style={{ color: '#020617' }}
                                 >
                                     {slides[current].secondaryCta}
                                 </Link>

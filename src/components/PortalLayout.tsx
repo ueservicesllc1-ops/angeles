@@ -67,7 +67,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     return (
         <div className="flex h-screen bg-slate-950 overflow-hidden">
             {/* Sidebar Desktop - Fixed Left */}
-            <div className="hidden lg:flex w-72 bg-slate-900 border-r border-slate-800 flex-col h-full fixed left-0 top-0 z-40 pt-[120px]">
+            <div className="hidden lg:flex w-72 bg-slate-900 border-r border-slate-800 flex-col h-full fixed left-0 top-0 z-40 pt-16 sm:pt-20 md:pt-24 lg:pt-[120px]">
                 {/* Branding removed - provided by global Navbar */}
 
                 <nav className="flex-1 px-4 py-8 space-y-2 overflow-y-auto">
@@ -113,7 +113,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                 <div className="lg:hidden absolute top-4 left-4 z-40">
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2 text-gray-300 hover:text-white bg-slate-900/50 rounded-lg backdrop-blur-sm mt-[100px]"
+                        className="p-2 text-gray-300 hover:text-white bg-slate-900/50 rounded-lg backdrop-blur-sm mt-16 sm:mt-20 md:mt-24"
                     >
                         <Menu className="w-6 h-6" />
                     </button>
@@ -156,7 +156,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                 )}
 
                 {/* Page Content - Padded top for header and navbar */}
-                <main className="flex-1 overflow-y-auto p-6 pt-[180px] scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+                <main className="flex-1 overflow-y-auto p-4 sm:p-6 pt-20 sm:pt-24 md:pt-32 lg:pt-[140px] scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
                     {children}
                 </main>
             </div>

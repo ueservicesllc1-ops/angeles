@@ -80,7 +80,8 @@ export default function DocumentsPage() {
                     </p>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center px-8 py-3 text-lg font-semibold text-blue-600 bg-white hover:bg-blue-50 rounded-lg transition-colors shadow-lg"
+                        className="inline-flex items-center px-8 py-3 text-lg font-semibold bg-white hover:bg-blue-50 rounded-lg transition-colors shadow-lg"
+                        style={{ color: '#2563eb' }}
                     >
                         Contact Us
                     </Link>

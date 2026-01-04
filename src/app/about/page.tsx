@@ -63,16 +63,13 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border border-slate-800"
                     >
-                        {/* Placeholder for team image - using a generic office image if team.png not available or as fallback */}
-                        <div className="absolute inset-0 bg-slate-900 flex items-center justify-center">
-                            {/* If you have a real image, use Image component here */}
-                            <div className="text-slate-600 flex flex-col items-center">
-                                <Users size={64} className="mb-4 opacity-50" />
-                                <span>Team Image</span>
-                            </div>
-                        </div>
-                        {/* Fallback pattern */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 to-slate-900/20"></div>
+                        <Image
+                            src="/about-team.png"
+                            alt="Angeles Group Team Office"
+                            fill
+                            className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 to-slate-900/20 mix-blend-overlay"></div>
                     </motion.div>
                 </div>
 

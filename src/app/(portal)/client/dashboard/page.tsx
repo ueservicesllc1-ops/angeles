@@ -44,7 +44,7 @@ export default function ClientDashboard() {
                     </div>
                     <Link
                         href="/client/cases/new"
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)]"
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold rounded-lg shadow-sm !text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)]"
                     >
                         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -137,7 +137,7 @@ export default function ClientDashboard() {
                         <div className="mt-6">
                             <Link
                                 href="/client/cases/new"
-                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-500 transition shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)]"
+                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg !text-white bg-blue-600 hover:bg-blue-500 transition shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)]"
                             >
                                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -171,7 +171,7 @@ export default function ClientDashboard() {
                                     <div className="ml-6 flex-shrink-0">
                                         <Link
                                             href={`/client/cases/${taxCase.id}`}
-                                            className="inline-flex items-center px-4 py-2 border border-slate-700 shadow-sm text-sm font-medium rounded-lg text-white bg-slate-800 hover:bg-slate-700 transition"
+                                            className="inline-flex items-center px-4 py-2 border border-slate-700 shadow-sm text-sm font-medium rounded-lg !text-white bg-slate-800 hover:bg-slate-700 transition"
                                         >
                                             View Details
                                             <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
