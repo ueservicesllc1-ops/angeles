@@ -5,16 +5,10 @@ import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { Loader2, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const services = [
-    'Tax Preparation',
-    'Bookkeeping',
-    'Incorporation',
-    'Notary/Multiservices',
-    'Other',
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ContactForm() {
+    const { t } = useLanguage();
     const [formData, setFormData] = React.useState({
         name: '',
         email: '',
@@ -23,6 +17,14 @@ export default function ContactForm() {
         message: '',
     });
     const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+    const serviceOptions = [
+        { value: 'Tax Preparation', label: t('contactForm.services.tax') },
+        { value: 'Bookkeeping', label: t('contactForm.services.bookkeeping') },
+        { value: 'Incorporation', label: t('contactForm.services.incorporation') },
+        { value: 'Notary/Multiservices', label: t('contactForm.services.notary') },
+        { value: 'Other', label: t('contactForm.services.other') },
+    ];
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,7 +56,7 @@ export default function ContactForm() {
                     className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center gap-3"
                 >
                     <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
-                    <p className="text-sm font-medium">Message sent successfully! We'll be in touch soon.</p>
+                    <p className="text-sm font-medium">{t('contactForm.success')}</p>
                 </motion.div>
             )}
             {status === 'error' && (
@@ -64,14 +66,15 @@ export default function ContactForm() {
                     className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center gap-3"
                 >
                     <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                    <p className="text-sm font-medium">Something went wrong. Please try again later.</p>
+                    <p className="text-sm font-medium">{t('contactForm.error')}</p>
                 </motion.div>
             )}
 
             <div className="space-y-4">
                 <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1.5">Full Name</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1.5">{t('contactForm.labels.name')}</label>
                     <input
+                        suppressHydrationWarning
                         type="text"
                         name="name"
                         id="name"
@@ -85,8 +88,9 @@ export default function ContactForm() {
 
                 <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1.5">Email Address</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1.5">{t('contactForm.labels.email')}</label>
                         <input
+                            suppressHydrationWarning
                             type="email"
                             name="email"
                             id="email"
@@ -98,8 +102,9 @@ export default function ContactForm() {
                         />
                     </div>
                     <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1.5">Phone Number</label>
+                        <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1.5">{t('contactForm.labels.phone')}</label>
                         <input
+                            suppressHydrationWarning
                             type="tel"
                             name="phone"
                             id="phone"
@@ -113,9 +118,10 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-slate-300 mb-1.5">Interested Service</label>
+                    <label htmlFor="service" className="block text-sm font-medium text-slate-300 mb-1.5">{t('contactForm.labels.service')}</label>
                     <div className="relative">
                         <select
+                            suppressHydrationWarning
                             name="service"
                             id="service"
                             required
@@ -123,9 +129,9 @@ export default function ContactForm() {
                             onChange={handleChange}
                             className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none cursor-pointer"
                         >
-                            <option value="" disabled>Select a service...</option>
-                            {services.map((option) => (
-                                <option key={option} value={option}>{option}</option>
+                            <option value="" disabled>{t('contactForm.placeholders.select')}</option>
+                            {serviceOptions.map((option) => (
+                                <option key={option.value} value={option.value}>{option.label}</option>
                             ))}
                         </select>
                         <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
@@ -135,7 +141,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-1.5">Your Message</label>
+                    <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-1.5">{t('contactForm.labels.message')}</label>
                     <textarea
                         name="message"
                         id="message"
@@ -144,12 +150,13 @@ export default function ContactForm() {
                         value={formData.message}
                         onChange={handleChange}
                         className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                        placeholder="Tell us about your needs..."
+                        placeholder={t('contactForm.placeholders.message')}
                     />
                 </div>
             </div>
 
             <button
+                suppressHydrationWarning
                 type="submit"
                 disabled={status === 'loading'}
                 className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed group"
@@ -158,7 +165,7 @@ export default function ContactForm() {
                     <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
                     <>
-                        Send Message
+                        {t('contactForm.button')}
                         <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </>
                 )}

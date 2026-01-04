@@ -1,10 +1,11 @@
 'use client';
 
+import * as React from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, TrendingUp, ShieldCheck, Calculator, BarChart3, PieChart, Users, Building2 } from 'lucide-react';
+import { CheckCircle2, Calculator, BarChart3, Building2, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import HeroCarousel from '@/components/HeroCarousel';
+import { useLanguage } from '@/context/LanguageContext';
 
 const container = {
   hidden: { opacity: 0 },
@@ -22,6 +23,8 @@ const item = {
 };
 
 export default function HomePage() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-slate-950 font-sans selection:bg-blue-500/30">
 
@@ -37,8 +40,8 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="mb-20"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Holistic Financial Architecture</h2>
-            <p className="text-slate-400 text-lg max-w-2xl">Beyond simple compliance. We build the financial infrastructure that supports your scaling business.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">{t('home.holistic.title')}</h2>
+            <p className="text-slate-400 text-lg max-w-2xl">{t('home.holistic.subtitle')}</p>
           </motion.div>
 
           <motion.div
@@ -55,14 +58,14 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
                   <Calculator size={24} />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Strategic Tax Planning</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">{t('home.services.tax.title')}</h3>
                 <p className="text-slate-400 text-lg leading-relaxed max-w-md">
-                  Stop reacting to tax season. Our forward-looking approach identifies deductions, credits, and structures that save you money before the year even ends.
+                  {t('home.services.tax.description')}
                 </p>
-                <div className="mt-8 flex gap-2">
-                  <div className="px-3 py-1 bg-slate-800 rounded-lg text-xs text-slate-300">Corporate Return</div>
-                  <div className="px-3 py-1 bg-slate-800 rounded-lg text-xs text-slate-300">Partnership</div>
-                  <div className="px-3 py-1 bg-slate-800 rounded-lg text-xs text-slate-300">Individual High-Net-Worth</div>
+                <div className="mt-8 flex gap-2 flex-wrap">
+                  <div className="px-3 py-1 bg-slate-800 rounded-lg text-xs text-slate-300">{t('home.services.tax.tags.0')}</div>
+                  <div className="px-3 py-1 bg-slate-800 rounded-lg text-xs text-slate-300">{t('home.services.tax.tags.1')}</div>
+                  <div className="px-3 py-1 bg-slate-800 rounded-lg text-xs text-slate-300">{t('home.services.tax.tags.2')}</div>
                 </div>
               </div>
             </motion.div>
@@ -73,15 +76,15 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-6">
                 <Building2 size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Business Formation</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">{t('home.services.formation.title')}</h3>
               <p className="text-slate-400 leading-relaxed mb-6">
-                Start on solid ground. We analyze your liability and growth potential to recommend the perfect entity structure.
+                {t('home.services.formation.description')}
               </p>
               <ul className="space-y-3 text-slate-400">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> LLC Formation</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> S-Corp Election</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> C-Corp Registration</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> Operating Agreements</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> {t('home.services.formation.items.0')}</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> {t('home.services.formation.items.1')}</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> {t('home.services.formation.items.2')}</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-500" /> {t('home.services.formation.items.3')}</li>
               </ul>
             </motion.div>
 
@@ -90,9 +93,9 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-4">
                 <BarChart3 size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Bookkeeping</h3>
+              <h3 className="text-xl font-bold text-white mb-2">{t('home.services.bookkeeping.title')}</h3>
               <p className="text-slate-400 leading-relaxed text-sm">
-                Monthly reconciliation and financial statements that give you a clear pulse on your business health.
+                {t('home.services.bookkeeping.description')}
               </p>
             </motion.div>
 
@@ -101,9 +104,9 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
                 <ShieldCheck size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Audit Defense</h3>
+              <h3 className="text-xl font-bold text-white mb-2">{t('home.services.audit.title')}</h3>
               <p className="text-slate-400 leading-relaxed text-sm">
-                Full representation before the IRS. We handle the bureaucracy so you can keep running your business.
+                {t('home.services.audit.description')}
               </p>
             </motion.div>
           </motion.div>
@@ -115,10 +118,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
-              { label: 'Years Experience', value: '20+' },
-              { label: 'Business Clients', value: '500+' },
-              { label: 'Tax Savings', value: '$2M+' },
-              { label: 'Audit Success Rate', value: '100%' },
+              { label: t('home.stats.experience'), value: '20+' },
+              { label: t('home.stats.clients'), value: '500+' },
+              { label: t('home.stats.savings'), value: '$2M+' },
+              { label: t('home.stats.success'), value: '100%' },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.value}</div>
@@ -133,9 +136,9 @@ export default function HomePage() {
       <section className="relative py-32 bg-slate-950 overflow-hidden">
         <div className="absolute inset-0 bg-blue-600/5"></div>
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Ready to Optimize Your Finances?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">{t('home.cta.title')}</h2>
           <p className="text-xl text-slate-400 mb-12">
-            Join the hundreds of business owners who trust Angeles Group with their financial future.
+            {t('home.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -143,7 +146,7 @@ export default function HomePage() {
               className="px-8 py-4 bg-white rounded-xl font-bold hover:bg-slate-200 transition-colors"
               style={{ color: '#020617' }}
             >
-              Schedule Free Consultation
+              {t('home.cta.button')}
             </Link>
           </div>
         </div>
@@ -152,4 +155,3 @@ export default function HomePage() {
     </div>
   );
 }
-import * as React from 'react';

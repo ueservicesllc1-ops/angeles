@@ -4,49 +4,51 @@ import * as React from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-
-const slides = [
-    {
-        id: 1,
-        badge: "Accepting New Clients for 2026 Tax Season",
-        title: "Financial Clarity",
-        highlight: "Defined by Precision",
-        highlightGradient: "from-blue-400 via-indigo-400 to-cyan-400",
-        description: "We deploy advanced tax strategies and rigorous bookkeeping to help growth-minded companies maximize wealth and minimize liability.",
-        primaryCta: "Access Client Portal",
-        primaryLink: "/login",
-        secondaryCta: "Expert Consultation",
-        secondaryLink: "/contact"
-    },
-    {
-        id: 2,
-        badge: "Maximize Your Refunds & Minimize Stress",
-        title: "Professional",
-        highlight: "TAXES",
-        highlightGradient: "from-orange-500 via-orange-400 to-orange-500",
-        description: "Don't leave money on the table. Our expert team ensures you get every deduction you deserve with accurate, timely, and compliant tax filing.",
-        primaryCta: "Start My Tax Return",
-        primaryLink: "/contact",
-        secondaryCta: "Learn More",
-        secondaryLink: "/services"
-    },
-    {
-        id: 3,
-        badge: "Strategic Bookkeeping for Growth",
-        title: "Detailed Financial",
-        highlight: "Intelligence & Insights",
-        highlightGradient: "from-blue-400 via-indigo-400 to-cyan-400",
-        description: "Go beyond basic data entry. Get actionable financial insights that help you make smarter business decisions and drive sustainable growth.",
-        primaryCta: "Get a Quote",
-        primaryLink: "/contact",
-        secondaryCta: "View Services",
-        secondaryLink: "/services"
-    }
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function HeroCarousel() {
+    const { t } = useLanguage();
     const [current, setCurrent] = React.useState(0);
     const [direction, setDirection] = React.useState(0);
+
+    const slides = [
+        {
+            id: 1,
+            badge: t('hero.slide1.badge'),
+            title: t('hero.slide1.title'),
+            highlight: t('hero.slide1.highlight'),
+            highlightGradient: "from-blue-400 via-indigo-400 to-cyan-400",
+            description: t('hero.slide1.description'),
+            primaryCta: t('hero.slide1.primaryCta'),
+            primaryLink: "/login",
+            secondaryCta: t('hero.slide1.secondaryCta'),
+            secondaryLink: "/contact"
+        },
+        {
+            id: 2,
+            badge: t('hero.slide2.badge'),
+            title: t('hero.slide2.title'),
+            highlight: t('hero.slide2.highlight'),
+            highlightGradient: "from-orange-500 via-orange-400 to-orange-500",
+            description: t('hero.slide2.description'),
+            primaryCta: t('hero.slide2.primaryCta'),
+            primaryLink: "/contact",
+            secondaryCta: t('hero.slide2.secondaryCta'),
+            secondaryLink: "/services"
+        },
+        {
+            id: 3,
+            badge: t('hero.slide3.badge'),
+            title: t('hero.slide3.title'),
+            highlight: t('hero.slide3.highlight'),
+            highlightGradient: "from-blue-400 via-indigo-400 to-cyan-400",
+            description: t('hero.slide3.description'),
+            primaryCta: t('hero.slide3.primaryCta'),
+            primaryLink: "/contact",
+            secondaryCta: t('hero.slide3.secondaryCta'),
+            secondaryLink: "/services"
+        }
+    ];
 
     const slideVariants = {
         enter: (direction: number) => ({
@@ -83,7 +85,7 @@ export default function HeroCarousel() {
             paginate(1);
         }, 8000); // 8 seconds per slide
         return () => clearInterval(timer);
-    }, []);
+    }, [slides.length]);
 
     return (
         <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden h-auto min-h-[85vh] flex items-center">

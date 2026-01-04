@@ -7,9 +7,12 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Shield } from 'lucide-react';
 
 import { useAuth } from '@/context/AuthContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { Globe } from 'lucide-react';
 
 export default function Navbar() {
     const { user, userProfile } = useAuth();
+    const { t, language, setLanguage } = useLanguage();
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
     const [scrolled, setScrolled] = React.useState(false);
     const pathname = usePathname();
@@ -41,6 +44,7 @@ export default function Navbar() {
                                     fill
                                     className="object-contain object-left"
                                     priority
+                                    sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, (max-width: 1024px) 192px, (max-width: 1280px) 280px, 350px"
                                 />
                             </div>
                         </Link>
@@ -48,16 +52,36 @@ export default function Navbar() {
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
-                        {['Services', 'About', 'Contact'].map((item) => (
-                            <Link
-                                key={item}
-                                href={`/${item.toLowerCase()}`}
-                                className="text-xs lg:text-sm font-semibold !text-white hover:text-blue-400 transition-colors relative group px-2"
-                            >
-                                {item}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
-                            </Link>
-                        ))}
+                        <Link
+                            href="/services"
+                            className="text-xs lg:text-sm font-semibold !text-white hover:text-blue-400 transition-colors relative group px-2"
+                        >
+                            {t('nav.services')}
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
+                        </Link>
+                        <Link
+                            href="/about"
+                            className="text-xs lg:text-sm font-semibold !text-white hover:text-blue-400 transition-colors relative group px-2"
+                        >
+                            {t('nav.about')}
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className="text-xs lg:text-sm font-semibold !text-white hover:text-blue-400 transition-colors relative group px-2"
+                        >
+                            {t('nav.contact')}
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
+                        </Link>
+
+                        {/* Language Selector Desktop */}
+                        <button
+                            onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+                            className="flex items-center gap-1 text-xs lg:text-sm font-medium text-slate-300 hover:text-white transition-colors border border-slate-700 rounded-full px-3 py-1 bg-slate-900/50"
+                        >
+                            <Globe className="w-3.5 h-3.5" />
+                            <span>{language === 'en' ? 'ES' : 'EN'}</span>
+                        </button>
                         {user ? (
                             <div className="flex items-center gap-3">
                                 <div className="text-right hidden lg:block">
@@ -73,7 +97,7 @@ export default function Navbar() {
                                 href="/login"
                                 className="inline-flex items-center px-4 lg:px-6 py-2 lg:py-2.5 text-xs lg:text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)]"
                             >
-                                Client Portal
+                                {t('nav.login')}
                             </Link>
                         )}
                     </div>
@@ -94,16 +118,40 @@ export default function Navbar() {
             {/* Mobile menu */}
             {mobileMenuOpen && (
                 <div className="md:hidden absolute top-full left-0 w-full bg-slate-950/95 backdrop-blur-md border-b border-slate-800 shadow-xl py-3 px-3 flex flex-col gap-1 animate-in slide-in-from-top-2">
-                    {['Services', 'About', 'Contact'].map((item) => (
-                        <Link
-                            key={item}
-                            href={`/${item.toLowerCase()}`}
-                            className="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:text-white hover:bg-slate-800/70 transition"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            {item}
-                        </Link>
-                    ))}
+                    <Link
+                        href="/services"
+                        className="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:text-white hover:bg-slate-800/70 transition"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        {t('nav.services')}
+                    </Link>
+                    <Link
+                        href="/about"
+                        className="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:text-white hover:bg-slate-800/70 transition"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        {t('nav.about')}
+                    </Link>
+                    <Link
+                        href="/contact"
+                        className="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:text-white hover:bg-slate-800/70 transition"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        {t('nav.contact')}
+                    </Link>
+
+                    {/* Language Selector Mobile */}
+                    <button
+                        onClick={() => {
+                            setLanguage(language === 'en' ? 'es' : 'en');
+                            setMobileMenuOpen(false);
+                        }}
+                        className="flex items-center gap-2 px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:text-white hover:bg-slate-800/70 transition w-full text-left"
+                    >
+                        <Globe className="w-5 h-5" />
+                        <span>{language === 'en' ? 'Cambiar a Español' : 'Switch to English'}</span>
+                    </button>
+
                     {user ? (
                         <div className="px-4 py-3 rounded-lg bg-slate-800/50 mt-2">
                             <p className="text-sm font-medium text-white">{userProfile?.displayName || 'User'}</p>
@@ -115,7 +163,7 @@ export default function Navbar() {
                             className="block px-4 py-3 rounded-lg text-base font-medium text-center text-white bg-blue-600 hover:bg-blue-500 transition mt-2"
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            Client Portal
+                            {t('nav.login')}
                         </Link>
                     )}
                 </div>

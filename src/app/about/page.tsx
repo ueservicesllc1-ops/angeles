@@ -4,8 +4,11 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Target, Users, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function AboutPage() {
+    const { t } = useLanguage();
+
     return (
         <div className="min-h-screen bg-slate-950 text-white selection:bg-blue-500/30 font-sans">
             {/* Header Section */}
@@ -21,12 +24,12 @@ export default function AboutPage() {
                     >
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
                             <Users className="w-4 h-4" />
-                            Our Mission
+                            {t('aboutPage.header.badge')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                            Building Trust Through <br />
+                            {t('aboutPage.header.title')} <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                                Financial Excellence
+                                {t('aboutPage.header.highlight')}
                             </span>
                         </h1>
                     </motion.div>
@@ -41,19 +44,13 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="space-y-6"
                     >
-                        <h2 className="text-3xl font-bold text-white">More Than Just Numbers</h2>
-                        <h3 className="text-xl text-blue-400 font-medium">Helping our community prosper with expert financial guidance.</h3>
+                        <h2 className="text-3xl font-bold text-white">{t('aboutPage.mission.title')}</h2>
+                        <h3 className="text-xl text-blue-400 font-medium">{t('aboutPage.mission.subtitle')}</h3>
 
                         <div className="space-y-4 text-slate-400 leading-relaxed">
-                            <p>
-                                At Angeles Tax, Bookkeeping & Multiservices, we believe that professional financial services should be accessible, transparent, and trustworthy. With over 20 years of experience, we have dedicated ourselves to serving individuals, families, and small business owners in Georgia and beyond.
-                            </p>
-                            <p>
-                                We understand the challenges of navigating the US tax system, especially for the immigrant and Hispanic community. That is why we provide service in both English and Spanish, ensuring you fully understand every step of the process.
-                            </p>
-                            <p>
-                                We are not just tax preparers; we are your partners in financial growth. Whether you are filing your first return, starting a new company, or organizing your business finances, we are here to provide the stability and expertise you deserve.
-                            </p>
+                            <p>{t('aboutPage.mission.p1')}</p>
+                            <p>{t('aboutPage.mission.p2')}</p>
+                            <p>{t('aboutPage.mission.p3')}</p>
                         </div>
                     </motion.div>
 
@@ -68,6 +65,7 @@ export default function AboutPage() {
                             alt="Angeles Group Team Office"
                             fill
                             className="object-cover"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
                         />
                         <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 to-slate-900/20 mix-blend-overlay"></div>
                     </motion.div>
@@ -80,26 +78,26 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="text-3xl font-bold text-white mb-16"
                     >
-                        Our Core Values
+                        {t('aboutPage.values.title')}
                     </motion.h2>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         <ValueCard
                             icon={<Shield className="w-8 h-8" />}
-                            title="Trust"
-                            description="We treat your information with the highest level of security and confidentiality."
+                            title={t('aboutPage.values.trust.title')}
+                            description={t('aboutPage.values.trust.description')}
                             delay={0.1}
                         />
                         <ValueCard
                             icon={<CheckCircle2 className="w-8 h-8" />}
-                            title="Accuracy"
-                            description="We effectively minimize errors and maximize your legal refund."
+                            title={t('aboutPage.values.accuracy.title')}
+                            description={t('aboutPage.values.accuracy.description')}
                             delay={0.2}
                         />
                         <ValueCard
                             icon={<Target className="w-8 h-8" />}
-                            title="Community"
-                            description="We are proud to serve and empower our local diverse community."
+                            title={t('aboutPage.values.community.title')}
+                            description={t('aboutPage.values.community.description')}
                             delay={0.3}
                         />
                     </div>

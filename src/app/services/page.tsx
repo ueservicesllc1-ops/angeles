@@ -2,11 +2,38 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Calculator, BarChart3, Building2, FileText, Globe, PenTool, Shield, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Calculator, BarChart3, Building2, FileText, Globe, Shield, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ServicesPage() {
+    const { t } = useLanguage();
+
+    const taxFeatures = [
+        t('servicesPage.tax.features.0'),
+        t('servicesPage.tax.features.1'),
+        t('servicesPage.tax.features.2'),
+        t('servicesPage.tax.features.3'),
+        t('servicesPage.tax.features.4')
+    ];
+
+    const bookkeepingFeatures = [
+        t('servicesPage.bookkeeping.features.0'),
+        t('servicesPage.bookkeeping.features.1'),
+        t('servicesPage.bookkeeping.features.2'),
+        t('servicesPage.bookkeeping.features.3'),
+        t('servicesPage.bookkeeping.features.4')
+    ];
+
+    const incorporationFeatures = [
+        t('servicesPage.incorporations.features.0'),
+        t('servicesPage.incorporations.features.1'),
+        t('servicesPage.incorporations.features.2'),
+        t('servicesPage.incorporations.features.3'),
+        t('servicesPage.incorporations.features.4')
+    ];
+
     return (
         <div className="min-h-screen bg-slate-950 text-white selection:bg-blue-500/30 font-sans">
             {/* Header Section */}
@@ -22,12 +49,12 @@ export default function ServicesPage() {
                     >
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
                             <Shield className="w-4 h-4" />
-                            Comprehensive Solutions
+                            {t('servicesPage.header.badge')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                            Expert Services tailored to <br />
+                            {t('servicesPage.header.title')} <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                                Your Financial Success
+                                {t('servicesPage.header.highlight')}
                             </span>
                         </h1>
                     </motion.div>
@@ -39,12 +66,12 @@ export default function ServicesPage() {
                 {/* TAX PREPARATION */}
                 <ServiceSection
                     id="tax"
-                    title="Tax Preparation"
-                    subtitle="TAX SERVICES"
-                    description="We take the stress out of tax season. Whether you are an individual with a simple return or a self-employed professional with complex expenses, we ensure accuracy and maximum refunds."
+                    title={t('servicesPage.tax.title')}
+                    subtitle={t('servicesPage.tax.subtitle')}
+                    description={t('servicesPage.tax.description')}
                     icon={<Calculator className="w-12 h-12 text-blue-500" />}
-                    features={['Individual (1040) Returns', 'Self-Employed & Freelancers', 'ITIN Applications & Renewals', 'Amended Returns (1040-X)', 'State Tax Filings (All 50 States)']}
-                    cta="Schedule Tax Appt"
+                    features={taxFeatures}
+                    cta={t('servicesPage.tax.cta')}
                     ctaLink="/contact"
                     imageSrc="/tax.png"
                     align="left"
@@ -53,12 +80,12 @@ export default function ServicesPage() {
                 {/* BOOKKEEPING */}
                 <ServiceSection
                     id="bookkeeping"
-                    title="Bookkeeping for Small Business"
-                    subtitle="BUSINESS SOLUTIONS"
-                    description="Keep your finances organized and ready for tax time. We handle the numbers so you can focus on growing your business."
+                    title={t('servicesPage.bookkeeping.title')}
+                    subtitle={t('servicesPage.bookkeeping.subtitle')}
+                    description={t('servicesPage.bookkeeping.description')}
                     icon={<BarChart3 className="w-12 h-12 text-emerald-500" />}
-                    features={['Monthly Bookkeeping', 'Expense Tracking', 'Bank Reconciliations', 'Financial Statements (P&L)', 'Payroll Setup Assistance']}
-                    cta="Get a Quote"
+                    features={bookkeepingFeatures}
+                    cta={t('servicesPage.bookkeeping.cta')}
                     ctaLink="/contact"
                     imageSrc="/bookkeeping.png"
                     align="right"
@@ -67,12 +94,12 @@ export default function ServicesPage() {
                 {/* INCORPORATIONS */}
                 <ServiceSection
                     id="incorporations"
-                    title="Incorporations & Setup"
-                    subtitle="START YOUR BUSINESS"
-                    description="Turn your dream into a legal reality. We guide you through the entity selection process and handle all the paperwork."
+                    title={t('servicesPage.incorporations.title')}
+                    subtitle={t('servicesPage.incorporations.subtitle')}
+                    description={t('servicesPage.incorporations.description')}
                     icon={<Building2 className="w-12 h-12 text-purple-500" />}
-                    features={['LLC Registration', 'C-Corp & S-Corp Setup', 'EIN (Tax ID) Obtainment', 'Operating Agreements', 'Business License Guidance']}
-                    cta="Start Your Business"
+                    features={incorporationFeatures}
+                    cta={t('servicesPage.incorporations.cta')}
                     ctaLink="/contact"
                     imageSrc="/incorporation.png"
                     align="left"
@@ -86,22 +113,22 @@ export default function ServicesPage() {
                     className="bg-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-800 relative overflow-hidden text-center"
                 >
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-                    <h2 className="text-3xl font-bold text-white mb-8">Additional Multiservices</h2>
+                    <h2 className="text-3xl font-bold text-white mb-8">{t('servicesPage.multiservices.title')}</h2>
 
                     <div className="grid md:grid-cols-2 gap-12">
                         <div className="space-y-4">
                             <div className="w-16 h-16 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-blue-400">
                                 <FileText className="w-8 h-8" />
                             </div>
-                            <h3 className="text-xl font-bold text-white">Administrative</h3>
-                            <p className="text-slate-400">Notary Public, Document Translation (Spanish/English), Form Filling Assistance.</p>
+                            <h3 className="text-xl font-bold text-white">{t('servicesPage.multiservices.admin.title')}</h3>
+                            <p className="text-slate-400">{t('servicesPage.multiservices.admin.description')}</p>
                         </div>
                         <div className="space-y-4">
                             <div className="w-16 h-16 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-pink-400">
                                 <Globe className="w-8 h-8" />
                             </div>
-                            <h3 className="text-xl font-bold text-white">Logistics & Design</h3>
-                            <p className="text-slate-400">Package Delivery Worldwide, Graphic Design Services for Business Cards & Flyers.</p>
+                            <h3 className="text-xl font-bold text-white">{t('servicesPage.multiservices.logistics.title')}</h3>
+                            <p className="text-slate-400">{t('servicesPage.multiservices.logistics.description')}</p>
                         </div>
                     </div>
                 </motion.div>

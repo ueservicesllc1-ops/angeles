@@ -4,8 +4,11 @@ import * as React from 'react';
 import { MapPin, Phone, Mail, Clock, Shield } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ContactPage() {
+    const { t } = useLanguage();
+
     return (
         <div className="min-h-screen bg-slate-950 text-white selection:bg-blue-500/30 font-sans">
             {/* Header Section */}
@@ -21,16 +24,16 @@ export default function ContactPage() {
                     >
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
                             <Shield className="w-4 h-4" />
-                            Here to Help
+                            {t('contactPage.header.badge')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                            Start Your Financial <br />
+                            {t('contactPage.header.title')} <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                                Transformation Today
+                                {t('contactPage.header.highlight')}
                             </span>
                         </h1>
                         <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-                            Whether you need tax preparation, bookkeeping, or business incorporation, our team of experts is ready to assist you.
+                            {t('contactPage.header.description')}
                         </p>
                     </motion.div>
                 </div>
@@ -47,11 +50,11 @@ export default function ContactPage() {
                             viewport={{ once: true }}
                             className="space-y-8"
                         >
-                            <h2 className="text-2xl font-bold text-white mb-8">Get In Touch</h2>
+                            <h2 className="text-2xl font-bold text-white mb-8">{t('contactPage.info.title')}</h2>
 
                             <ContactItem
                                 icon={<MapPin className="w-6 h-6" />}
-                                title="Visit Our Office"
+                                title={t('contactPage.info.visit')}
                                 content={
                                     <>
                                         4188 Highway 53, Suite 102<br />
@@ -62,7 +65,7 @@ export default function ContactPage() {
 
                             <ContactItem
                                 icon={<Phone className="w-6 h-6" />}
-                                title="Give Us a Call"
+                                title={t('contactPage.info.call')}
                                 content={
                                     <a href="tel:8629267442" className="hover:text-blue-400 transition-colors">
                                         (862) 926-7442
@@ -72,7 +75,7 @@ export default function ContactPage() {
 
                             <ContactItem
                                 icon={<Mail className="w-6 h-6" />}
-                                title="Email Us"
+                                title={t('contactPage.info.email')}
                                 content={
                                     <a href="mailto:info@angelesgroup.net" className="hover:text-blue-400 transition-colors">
                                         info@angelesgroup.net
@@ -112,8 +115,8 @@ export default function ContactPage() {
                         >
                             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
                             <div className="relative z-10">
-                                <h3 className="text-2xl font-bold text-white mb-2">Send us a Message</h3>
-                                <p className="text-slate-400 mb-8">Fill out the form below and our team will get back to you within 24 hours.</p>
+                                <h3 className="text-2xl font-bold text-white mb-2">{t('contactPage.formSection.title')}</h3>
+                                <p className="text-slate-400 mb-8">{t('contactPage.formSection.subtitle')}</p>
                                 <ContactForm />
                             </div>
                         </motion.div>
