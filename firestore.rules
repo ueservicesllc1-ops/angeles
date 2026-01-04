@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // User Profiles
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
+        request.auth.uid == userId ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+      );
+    }
+
+    // Cases
+    match /cases/{caseId} {
+      // Create: User must be auth'd and assigning the case to themselves
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      
+      // Read: Allow all auth users to read (for dev/debugging or handling non-existent docs gracefully)
+      allow read: if request.auth != null;
+      
+      // Update/Delete: Strict ownership or admin
+      allow update, delete: if request.auth != null && (
+        resource.data.userId == request.auth.uid || 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'staff']
+      );
+
+      // Subcollection: Documents
+      match /documents/{documentId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && (
+           get(/databases/$(database)/documents/cases/$(caseId)).data.userId == request.auth.uid ||
+           get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'staff']
+        );
+      }
+    }
+    
+    // Contact Submissions
+    match /contact_submissions/{submissionId} {
+      allow create: if true;
+      allow read, write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

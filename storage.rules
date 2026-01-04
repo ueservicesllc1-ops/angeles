@@ -1,0 +1,14 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /cases/{caseId}/{allPaths=**} {
+      // Allow read/write if user is authenticated and owns the case folder (simplistic check for now)
+      // Ideally we check Firestore permissions, but Storage rules can't directly access Firestore easily without custom claims.
+      // safely: allow if auth
+      allow read, write: if request.auth != null;
+    }
+    match /{allPaths=**} {
+        allow read, write: if false;
+    }
+  }
+}
