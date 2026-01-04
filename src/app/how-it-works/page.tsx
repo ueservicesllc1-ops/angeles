@@ -1,13 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
+import Link from 'next/link';
 
 const steps = [
     {
@@ -34,42 +28,41 @@ const steps = [
 
 export default function HowItWorksPage() {
     return (
-        <Box sx={{ py: 10 }}>
-            <Container maxWidth="lg">
-                <Box sx={{ textAlign: 'center', mb: 8 }}>
-                    <Typography variant="overline" color="secondary" sx={{ fontWeight: 700 }}>PROCESS</Typography>
-                    <Typography variant="h2" sx={{ fontWeight: 700 }}>How It Works</Typography>
-                    <Typography variant="subtitle1" color="text.secondary" sx={{ mt: 2 }}>
-                        Simple, transparent, and efficient.
-                    </Typography>
-                </Box>
+        <div className="py-20 bg-slate-950">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-16">
+                    <div className="text-blue-400 font-bold text-sm uppercase tracking-wider mb-2">PROCESS</div>
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">How It Works</h1>
+                    <p className="text-xl text-slate-400">Simple, transparent, and efficient.</p>
+                </div>
 
-                <Grid container spacing={4}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                     {steps.map((step) => (
-                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={step.num}>
-                            <Card sx={{ height: '100%', position: 'relative', overflow: 'visible' }}>
-                                <CardContent sx={{ pt: 4, textAlign: 'center' }}>
-                                    <Typography variant="h1" sx={{ fontSize: '4rem', color: 'rgba(0,0,0,0.05)', position: 'absolute', top: -10, left: 10, fontWeight: 900 }}>
-                                        {step.num}
-                                    </Typography>
-                                    <Typography variant="h5" sx={{ mt: 2, mb: 2, fontWeight: 600 }}>
-                                        {step.title}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {step.desc}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                        <div key={step.num} className="relative bg-slate-900 border border-slate-800 rounded-xl p-8 hover:border-blue-500/50 transition-all hover:-translate-y-1">
+                            <div className="text-8xl font-black text-slate-800/50 absolute -top-4 -left-1">
+                                {step.num}
+                            </div>
+                            <div className="relative z-10 pt-8">
+                                <h3 className="text-xl font-bold text-white mb-3">
+                                    {step.title}
+                                </h3>
+                                <p className="text-slate-400 text-sm leading-relaxed">
+                                    {step.desc}
+                                </p>
+                            </div>
+                        </div>
                     ))}
-                </Grid>
+                </div>
 
-                <Box sx={{ mt: 8, textAlign: 'center' }}>
-                    <Button variant="contained" color="secondary" size="large" href="/contact">
+                <div className="text-center">
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center px-8 py-3 text-lg font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors shadow-lg shadow-blue-500/30"
+                    >
                         Get Started Now
-                    </Button>
-                </Box>
-            </Container>
-        </Box>
+                    </Link>
+                </div>
+            </div>
+        </div>
     );
 }

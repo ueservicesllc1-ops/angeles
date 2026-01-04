@@ -23,7 +23,7 @@ export interface UserProfile {
     displayName: string;
     role: UserRole;
     phoneNumber?: string;
-    createdAt: number; // Timestamp
+    createdAt: any; // Firestore Timestamp or FieldValue
     photoURL?: string;
 }
 
